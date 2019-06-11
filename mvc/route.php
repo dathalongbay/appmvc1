@@ -49,7 +49,7 @@ class Route {
         $controllerName = "MVC\\Controllers\\".$controller."Controller"; // MVC\Controllers\EmployeeController
 
 
-        echo '<br>$controllerName : ' . $controllerName;
+        echo '<br>$controller : ' . $controller;
         echo '<br>$controllerName : ' . $controllerName;
 
         if (class_exists($controllerName)) {
