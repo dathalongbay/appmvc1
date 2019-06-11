@@ -48,10 +48,15 @@ class Route {
         $controller = ucfirst($controller); // Employee
         $controllerName = "MVC\\Controllers\\".$controller."Controller"; // MVC\Controllers\EmployeeController
 
+
+        echo '<br>$controllerName : ' . $controllerName;
+        echo '<br>$controllerName : ' . $controllerName;
+
         if (class_exists($controllerName)) {
             $controllerObject = new $controllerName();
 
             $action = isset($_REQUEST["action"]) ? trim($_REQUEST["action"]) : 'index';
+            echo '<br>$action : ' . $action;
 
             if (method_exists($controllerObject, $action)) {
                 /**
