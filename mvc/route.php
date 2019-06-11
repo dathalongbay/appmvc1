@@ -9,6 +9,7 @@ namespace MVC;
 
 // nạp namespace
 use MVC\Controllers\EmployeeController;
+use MVC\Controllers\ProductController;
 use MVC\Controllers\ErrorController;
 
 class Route {
@@ -42,24 +43,32 @@ class Route {
          * http://localhost/appmvc1/index.php?controller=employee&action=delete
          */
 
-        if ($_REQUEST["controller"] == "employee") {
-            $controller = new EmployeeController();
-            if ($_REQUEST["action"] == "index") {
-                $controller->index();
-            }
 
-            if ($_REQUEST["action"] == "create") {
-                $controller->create();
-            }
+        $controller = isset($_REQUEST["controller"]) ? trim($_REQUEST["controller"]) : "employee";
+        $controller = ucfirst($controller); // Employee
+        $controllerName = "MVC\\Controllers\\".$controller."Controller"; // MVC\Controllers\EmployeeController
 
-            if ($_REQUEST["action"] == "edit") {
-                $controller->edit();
-            }
+        if (class_exists($controllerName)) {
+            $controllerObject = new $controllerName();
 
-            if ($_REQUEST["action"] == "delete") {
-                $controller->delete();
-            }
+            $action = isset($_REQUEST["action"]) ? trim($_REQUEST["action"]) : 'index';
 
+            if (method_exists($controllerObject, $action)) {
+                /**
+                 * $controllerObject->index()
+                 * $controllerObject->edit()
+                 * $controllerObject->delete()
+                 */
+                return $controllerObject->$action();
+            } else {
+                $controllerObject = new ErrorController();
+
+                return $controllerObject->redirect404();
+            }
+        } else {
+            $controllerObject = new ErrorController();
+
+            return $controllerObject->redirect404();
         }
 
 
