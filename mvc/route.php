@@ -44,6 +44,23 @@ class Route {
          */
 
 
+
+        /*
+         * Cách thủ công
+         * if ($_REQUEST["controller"] == 'employee') {
+            $controller = new EmployeeController();
+
+            if ($_REQUEST["action"] == 'index') {
+                $controller->index();
+            }
+
+            if ($_REQUEST["action"] == 'edit') {
+                    $controller->edit();
+            }
+        }*/
+
+
+
         $controller = isset($_REQUEST["controller"]) ? trim($_REQUEST["controller"]) : "employee";
         $controller = ucfirst($controller); // Employee
         $controllerName = "MVC\\Controllers\\".$controller."Controller"; // MVC\Controllers\EmployeeController
