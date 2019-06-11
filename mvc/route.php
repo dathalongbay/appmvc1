@@ -32,6 +32,14 @@ class Route {
          * $controller = new EmployeeController();
          * $controller->create();
          * $_REQUEST = $_POST + $_GET
+         *
+         * http://localhost/appmvc1/index.php?controller=employee&action=index
+         *
+         * http://localhost/appmvc1/index.php?controller=employee&action=create
+         *
+         * http://localhost/appmvc1/index.php?controller=employee&action=edit
+         *
+         * http://localhost/appmvc1/index.php?controller=employee&action=delete
          */
 
         if ($_REQUEST["controller"] == "employee") {
